@@ -1,6 +1,6 @@
 import "./reset.css";
 import "./global.css";
-import HomePage from "./pages/home/HomePage";
+import HomePage from "./pages/homePage/HomePage";
 
 function App({ youtube }) {
   return (
