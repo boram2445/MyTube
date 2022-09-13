@@ -1,5 +1,9 @@
-.videoList {
-  width: 100%;
+.list-container {
+  display: flex;
+  justify-content: center;
+}
+
+.video-list {
   display: grid;
   grid-template-columns: 360px 360px 360px 360px;
   gap: 10px;
