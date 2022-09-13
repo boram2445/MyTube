@@ -3,7 +3,7 @@ import logo from "../../assets/logo.png";
 import searchIcon from "../../assets/search.png";
 import styles from "./navbar.module.css";
 
-function Navbar({ onSearch }) {
+function Navbar({ onSearch, setSelectedVideo }) {
   const inputRef = useRef();
   function onClickBtn() {
     const inputValue = inputRef.current.value;
@@ -18,7 +18,7 @@ function Navbar({ onSearch }) {
   }
   return (
     <nav className={styles["nav-container"]}>
-      <h1 className={styles["logo"]}>
+      <h1 className={styles["logo"]} onClick={() => setSelectedVideo(null)}>
         <img src={logo} alt="My Tube" className={styles["logo-icon"]} />
         <span className={styles["logo-text"]}>MyTube</span>
       </h1>

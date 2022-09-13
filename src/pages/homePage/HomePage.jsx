@@ -7,7 +7,7 @@ function HomePage({ youtube }) {
   const [videoLists, setVideoLists] = useState([]);
   const [selectedVideo, setSelectedVideo] = useState(null);
   useEffect(() => {
-    // getMostPopular();
+    getMostPopular();
   }, []);
 
   async function getMostPopular() {
@@ -17,10 +17,11 @@ function HomePage({ youtube }) {
   async function onSearch(query) {
     const items = await youtube.search(query);
     setVideoLists(items);
+    setSelectedVideo(null);
   }
   return (
     <div className={styles["home-container"]}>
-      <Navbar onSearch={onSearch} onClick={() => setSelectedVideo(null)} />
+      <Navbar onSearch={onSearch} setSelectedVideo={setSelectedVideo} />
       <section className={styles["content-wrapper"]}>
         {selectedVideo && (
           <div className={styles["detail-wrapper"]}>
