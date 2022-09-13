@@ -3,8 +3,13 @@
   justify-content: center;
 }
 
-.video-list {
+.video-grid {
   display: grid;
   grid-template-columns: 360px 360px 360px 360px;
   gap: 10px;
+}
+
+.video-list {
+  display: flex;
+  flex-direction: column;
 }

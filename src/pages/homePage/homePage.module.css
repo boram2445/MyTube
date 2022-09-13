@@ -1,0 +1,17 @@
+.home-container {
+  color: var(--white);
+}
+
+.content-wrapper {
+  display: flex;
+}
+
+.detail-wrapper {
+  padding: 20px 20px 20px 40px;
+  flex: 1 1 70%;
+}
+
+.list-wrapper {
+  padding: 20px;
+  flex: 1 1 30%;
+}

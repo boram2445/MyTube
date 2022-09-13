@@ -1,0 +1,30 @@
+.video-title {
+  font-size: 2.2rem;
+  line-height: 2.6rem;
+}
+
+.top-wrap {
+  padding: 20px 0;
+  border-bottom: 1px solid #585858;
+}
+
+.channel-info {
+  margin-top: 15px;
+  font-size: 1.4rem;
+  color: #aaa;
+}
+
+.bottom-wrap {
+  padding: 20px 0;
+}
+
+.channel-title {
+  margin-bottom: 25px;
+  font-size: 2rem;
+}
+
+.description {
+  font-size: 1.8rem;
+  line-height: 2.4rem;
+  white-space: pre-wrap;
+}

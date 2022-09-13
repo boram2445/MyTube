@@ -1,11 +1,23 @@
-.video-item {
+.video-grid,
+.video-list {
   margin-bottom: 25px;
   cursor: pointer;
+}
+
+.video-list {
+  display: grid;
+  grid-template-columns: 168px 1fr;
+  gap: 10px;
 }
 
 .thumb-img {
   width: 360px;
   height: 200px;
+}
+
+.video-list .thumb-img {
+  width: 168px;
+  height: 94px;
 }
 
 .thumb-img img {
@@ -14,10 +26,18 @@
   height: 200px;
 }
 
+.video-list .thumb-img img {
+  height: 94px;
+}
+
 .channel-img {
   width: 36px;
   height: 36px;
   border-radius: 50%;
+}
+
+.video-list .channel-img {
+  display: none;
 }
 
 .channel-img img {
@@ -27,7 +47,7 @@
   border-radius: 50%;
 }
 
-.info-container {
+.video-grid .info-container {
   margin: 12px 24px 0 0;
   display: grid;
   grid-template-columns: 36px 1fr;

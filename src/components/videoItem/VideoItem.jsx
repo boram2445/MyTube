@@ -2,20 +2,22 @@ import { useEffect, useState } from "react";
 import styles from "./videoItem.module.css";
 import { unescapeHtml } from "../../utils/unescapeHtml";
 
-function VideoItem({ video, youtube }) {
-  const { thumbnails, title, channelId, channelTitle } = video;
+function VideoItem({ video, youtube, setSelectedVideo, display }) {
+  const { thumbnails, title, channelId, channelTitle } = video.snippet;
   const convertTitle = unescapeHtml(title);
   const [channelImg, setChannelImg] = useState("");
-
+  useEffect(() => {
+    getChannelImg();
+  }, []);
   async function getChannelImg() {
     const img = await youtube.channelImg(channelId);
     setChannelImg(img);
   }
-  useEffect(() => {
-    getChannelImg();
-  }, []);
   return (
-    <li className={styles["video-item"]}>
+    <li
+      className={styles[`video-${display}`]}
+      onClick={() => setSelectedVideo(video)}
+    >
       <div className={styles["thumb-img"]}>
         <img alt={title} src={thumbnails.medium.url} />
       </div>
