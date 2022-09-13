@@ -2,10 +2,10 @@ import "./reset.css";
 import "./global.css";
 import HomePage from "./pages/home/HomePage";
 
-function App() {
+function App({ youtube }) {
   return (
     <div className="app">
-      <HomePage />
+      <HomePage youtube={youtube} />
     </div>
   );
 }

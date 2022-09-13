@@ -2,23 +2,13 @@ import { useEffect, useState } from "react";
 import styles from "./videoItem.module.css";
 import { unescapeHtml } from "../../utils/unescapeHtml";
 
-function VideoItem({ video }) {
+function VideoItem({ video, youtube }) {
   const { thumbnails, title, channelId, channelTitle } = video;
   const convertTitle = unescapeHtml(title);
   const [channelImg, setChannelImg] = useState("");
 
   async function getChannelImg() {
-    const BASE_URL = "https://www.googleapis.com/youtube/v3";
-    const API_KEY = process.env.REACT_APP_YOUTUBE_KEY;
-    const requestOptions = {
-      method: "GET",
-    };
-    const response = await fetch(
-      `${BASE_URL}/channels?part=snippet&id=${channelId}&fields=items%2Fsnippet%2Fthumbnails&key=${API_KEY}`,
-      requestOptions
-    );
-    const data = await response.json();
-    const img = data.items[0].snippet.thumbnails.default.url;
+    const img = await youtube.channelImg(channelId);
     setChannelImg(img);
   }
   useEffect(() => {
