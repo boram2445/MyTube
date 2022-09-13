@@ -1,7 +1,11 @@
 /* 색상 변수 */
 :root {
+  --black: #121212;
   --dark-grey: #202020;
+  --middle-grey: #313131;
+  --grey-white: hsla(0, 100%, 100%, 0.88);
   --white: #ffffff;
+  --active-color: #065fd4;
 }
 
 html,
