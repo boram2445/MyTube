@@ -1,6 +1,6 @@
-import "./reset.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./components/Root";
+import HomePage from "./pages/HomePage";
 
 const router = createBrowserRouter([
   {
@@ -8,7 +8,7 @@ const router = createBrowserRouter([
     element: <Root />,
     errorElement: <p>Sorry, not Found😂</p>,
     children: [
-      { index: true, element: <p>Home Page</p> },
+      { index: true, element: <HomePage /> },
       {
         path: "/watch/:videoId",
         element: <p>Watch Video</p>,
