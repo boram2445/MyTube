@@ -1,13 +1,32 @@
 import "./reset.css";
-import "./global.css";
-import HomePage from "./pages/homePage/HomePage";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Root from "./components/Root";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Root />,
+    errorElement: <p>Sorry, not Found😂</p>,
+    children: [
+      { index: true, element: <p>Home Page</p> },
+      {
+        path: "/watch/:videoId",
+        element: <p>Watch Video</p>,
+      },
+      {
+        path: "/search/:searchId",
+        element: <p>Search</p>,
+      },
+      {
+        path: "/channel/:channelId",
+        element: <p>Channel</p>,
+      },
+    ],
+  },
+]);
 
 function App({ youtube }) {
-  return (
-    <div className="app">
-      <HomePage youtube={youtube} />
-    </div>
-  );
+  return <RouterProvider router={router}></RouterProvider>;
 }
 
 export default App;
