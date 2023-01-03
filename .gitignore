@@ -24,3 +24,11 @@ yarn-error.log*
 
 #API key
 .env
+
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
