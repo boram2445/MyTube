@@ -5,8 +5,8 @@ export default function TagList() {
 
   return (
     <ul className="flex gap-3 mt-2 mb-2">
-      {tags.map((tag) => (
-        <li>
+      {tags.map((tag, index) => (
+        <li key={index}>
           <button
             className={`cursor-pointer pt-1.5 pb-1.5 pl-3 pr-3 bg-middle-grey rounded-lg text-sm font-light opacity-80 hover:opacity-100 ${
               tag.selected && "bg-white text-black opacity-100"

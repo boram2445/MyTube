@@ -1,50 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Aside from "../components/Aside";
 import TagList from "../components/TagList";
 import VideoCard from "../components/VideoCard";
 
 export default function HomePage() {
-  const [videos, setVideos] = useState(initialVideos);
+  const [videos, setVideos] = useState([]);
+
+  useEffect(() => {
+    fetch("data/mostPopular.json")
+      .then((res) => res.json())
+      .then((data) => setVideos(data.items));
+  }, []);
+
+  console.log(videos);
 
   return (
     <div className="flex bg-yellow-500 text-blue-500 font-bold">
       <Aside />
-      <div className="ml-5 mr-5">
+      <div className="m-auto">
         <TagList />
-        {videos.map((video) => (
-          <VideoCard video={video} />
-        ))}
+        <ul className="m-auto mt-6 grid gap-x-4 gap-y-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
+          {videos.map((video) => (
+            <li key={video.id} className="cursor-pointer">
+              <VideoCard video={video.snippet} id={video.id} />
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
 }
-
-const initialVideos = [
-  {
-    src: "https://i.ytimg.com/an_webp/8Qww31Iybvc/mqdefault_6s.webp?du=3000&sqp=CJ2F0J0G&rs=AOn4CLDzw8h_IZqMaKYfBsiNrayKxRg1wg",
-    title: "천원vs만원vs십만원!! 홍대에서 사먹기!! 홍대놀려면 얼마 필요할까?!",
-    channelTitle: "파뿌리",
-    channelImg:
-      "https://yt3.googleusercontent.com/ytc/AMLnZu_UlBPap4gBbyJ15ksezMro6I3lkDrkDtcfIZiAfQ=s176-c-k-c0x00ffffff-no-rj-mo",
-    watched: "15만회",
-    publishedAt: "3시간전",
-  },
-  {
-    src: "https://i.ytimg.com/an_webp/8Qww31Iybvc/mqdefault_6s.webp?du=3000&sqp=CJ2F0J0G&rs=AOn4CLDzw8h_IZqMaKYfBsiNrayKxRg1wg",
-    title: "천원vs만원vs십만원!! 홍대에서 사먹기!! 홍대놀려면 얼마 필요할까?!",
-    channelTitle: "파뿌리",
-    channelImg:
-      "https://yt3.googleusercontent.com/ytc/AMLnZu_UlBPap4gBbyJ15ksezMro6I3lkDrkDtcfIZiAfQ=s176-c-k-c0x00ffffff-no-rj-mo",
-    watched: "15만회",
-    publishedAt: "3시간전",
-  },
-  {
-    src: "https://i.ytimg.com/an_webp/8Qww31Iybvc/mqdefault_6s.webp?du=3000&sqp=CJ2F0J0G&rs=AOn4CLDzw8h_IZqMaKYfBsiNrayKxRg1wg",
-    title: "천원vs만원vs십만원!! 홍대에서 사먹기!! 홍대놀려면 얼마 필요할까?!",
-    channelTitle: "파뿌리",
-    channelImg:
-      "https://yt3.googleusercontent.com/ytc/AMLnZu_UlBPap4gBbyJ15ksezMro6I3lkDrkDtcfIZiAfQ=s176-c-k-c0x00ffffff-no-rj-mo",
-    watched: "15만회",
-    publishedAt: "3시간전",
-  },
-];
