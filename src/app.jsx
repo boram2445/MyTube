@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./components/Root";
+import DetailPage from "./pages/DetailPage";
 import HomePage from "./pages/HomePage";
 import SearchPage from "./pages/SearchPage";
 
@@ -16,7 +17,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/watch/:videoId",
-        element: <p>Watch Video</p>,
+        element: <DetailPage />,
       },
       {
         path: "/channel/:channelId",
