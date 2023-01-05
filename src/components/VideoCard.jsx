@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import decodeUnescape from "../utils/decodeUnescape";
+import getElapsedTime from "../utils/getElapsedTime";
 
 export default function VideoCard({ video, id, videoType, search, watch }) {
   const {
@@ -16,13 +18,13 @@ export default function VideoCard({ video, id, videoType, search, watch }) {
 
   useEffect(() => {
     //이걸 여기에서 호출해도 되는 걸까?
-    // fetch(
-    //   `https://youtube.googleapis.com/youtube/v3/channels?part=snippet&id=${channelId}&key=${process.env.REACT_APP_YOUTUBE_KEY}`
-    // )
-    //   .then((res) => res.json())
-    //   .then((data) =>
-    //     setChannelImg(data.items[0].snippet.thumbnails.default.url)
-    //   );
+    fetch(
+      `https://youtube.googleapis.com/youtube/v3/channels?part=snippet&id=${channelId}&key=${process.env.REACT_APP_YOUTUBE_KEY}`
+    )
+      .then((res) => res.json())
+      .then((data) =>
+        setChannelImg(data.items[0].snippet.thumbnails.default.url)
+      );
   });
 
   //home과 search에서 video 카드를 사용하는데, 형태가 너무 달라서 css 처리가 힘들어서 나누어 주었다.
@@ -42,7 +44,7 @@ export default function VideoCard({ video, id, videoType, search, watch }) {
             <p className="text-grey">
               <span>조회수 9.9천회</span>
               <span className="font-medium"> &#183; </span>
-              <span> {publishedAt}시간</span>
+              <span> {getElapsedTime(publishedAt)}</span>
             </p>
           </div>
         </div>
@@ -55,12 +57,12 @@ export default function VideoCard({ video, id, videoType, search, watch }) {
         <div className="mt-2.5">
           <div className="font-light text-xs text-grey">
             <strong className="text-lg font-normal text-ellipsis text-white">
-              {title}
+              {decodeUnescape(title)}
             </strong>
             <p>
               <span>조회수 9.9천회</span>
               <span className="font-medium"> &#183; </span>
-              <span> {publishedAt}시간</span>
+              <span> {getElapsedTime(publishedAt)}</span>
             </p>
             <div className="mt-4 mb-4 flex">
               <img
@@ -78,7 +80,6 @@ export default function VideoCard({ video, id, videoType, search, watch }) {
   } else if (search && videoType === "channel") {
     content = (
       <>
-        {" "}
         <img
           className="rounded-full w-24 h-24"
           src={thumbnails.medium.url}
@@ -110,7 +111,7 @@ export default function VideoCard({ video, id, videoType, search, watch }) {
             <p>
               <span>조회수 9.9천회</span>
               <span className="font-medium"> &#183; </span>
-              <span> {publishedAt}시간</span>
+              <span>{getElapsedTime(publishedAt)}</span>
             </p>
           </div>
         </div>

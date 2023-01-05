@@ -7,8 +7,10 @@ export default function HomePage() {
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
-    // fetch('https://youtube.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=25')
-    fetch("data/mostPopular.json")
+    fetch(
+      `https://youtube.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=25&key=${process.env.REACT_APP_YOUTUBE_KEY}`
+    )
+      // fetch("data/mostPopular.json")
       .then((res) => res.json())
       .then((data) => setVideos(data.items));
   }, []);

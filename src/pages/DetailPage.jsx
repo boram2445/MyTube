@@ -8,25 +8,36 @@ import VideoCard from "../components/VideoCard";
 export default function DetailPage() {
   const [videoInfo, setVideoInfo] = useState({});
   const [relatedVideos, setRelatedVideos] = useState([]);
+  const [channelImg, setChannelImg] = useState("");
   const { videoId } = useParams();
+
+  const { title, description, channelId, channelTitle } = videoInfo;
 
   useEffect(() => {
     // //비디오 상세 내용 가져오기
-    // fetch(
-    //   `https://youtube.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${process.env.REACT_APP_YOUTUBE_KEY}`
-    // )
-    fetch("http://localhost:3000/data/info.json")
+    fetch(
+      `https://youtube.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${process.env.REACT_APP_YOUTUBE_KEY}`
+    )
+      // fetch("http://localhost:3000/data/info.json")
       .then((res) => res.json())
       .then((data) => setVideoInfo(data.items[0].snippet));
 
     //관련 비디오 가져오기
-    //fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&relatedToVideoId=${videoId}&type=video&maxResults=25&key=${process.env.REACT_APP_YOUTUBE_KEY}`)
-    fetch("http://localhost:3000/data/related.json")
+    fetch(
+      `https://youtube.googleapis.com/youtube/v3/search?part=snippet&relatedToVideoId=${videoId}&type=video&maxResults=25&key=${process.env.REACT_APP_YOUTUBE_KEY}`
+    )
+      // fetch("http://localhost:3000/data/related.json")
       .then((res) => res.json())
       .then((data) => setRelatedVideos(data.items));
-  }, []);
 
-  const { title, description, channelId, channelTitle } = videoInfo;
+    fetch(
+      `https://youtube.googleapis.com/youtube/v3/channels?part=snippet&id=${channelId}&key=${process.env.REACT_APP_YOUTUBE_KEY}`
+    )
+      .then((res) => res.json())
+      .then((data) =>
+        setChannelImg(data.items[0].snippet.thumbnails.default.url)
+      );
+  }, []);
 
   return (
     <div className="flex m-auto mt-6 pl-5 pr-5 justify-center max-w-5xl gap-4">
@@ -74,14 +85,13 @@ export default function DetailPage() {
           <Description content={description} />
         </div>
       </div>
-      <ul className="m-auto flex flex-col gap-4">
+      <ul className="m-auto  hidden md:block lg:block ">
         {relatedVideos.map((video) => (
-          <li key={video.id} className="cursor-pointer">
+          <li key={video.id} className="cursor-pointer mt-3">
             <VideoCard video={video.snippet} id={video.id} watch />
           </li>
         ))}
       </ul>
-      {/* <RelatedList /> */}
     </div>
   );
 }

@@ -8,10 +8,10 @@ export default function SearchPage() {
   const { searchId } = useParams();
   const [videos, setVideos] = useState([]);
   useEffect(() => {
-    // fetch(
-    //   `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${searchId}&key=${process.env.REACT_APP_YOUTUBE_KEY}`
-    // )
-    fetch("http://localhost:3000/data/search.json")
+    fetch(
+      `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${searchId}&key=${process.env.REACT_APP_YOUTUBE_KEY}`
+    )
+      // fetch("http://localhost:3000/data/search.json")
       .then((res) => res.json())
       .then((data) => setVideos(data.items));
   }, []);
@@ -19,7 +19,7 @@ export default function SearchPage() {
   return (
     <div className="flex">
       <Aside />
-      <div className="grow mt-4">
+      <div className="grow mt-4 pr-8">
         <div className="border-b border-middle-grey">
           <button className="flex gap-2 items-center hover:bg-middle-grey p-2 pl-4 pr-4 rounded-full">
             <BsFilterSquare className="text-xl" />

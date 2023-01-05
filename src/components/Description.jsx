@@ -5,7 +5,7 @@ export default function Description({ content }) {
 
   return (
     <div
-      className={`p-2.5 bg-middle-grey rounded-xl  flex items-center hover:brightness-125 cursor-pointer ${
+      className={`mt-2 p-2.5 bg-middle-grey rounded-xl  flex items-center hover:brightness-125 cursor-pointer ${
         !isOpen ? "h-28" : ""
       }`}
       onClick={() => setIsOpen((isOpen) => !isOpen)}
