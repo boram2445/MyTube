@@ -1,12 +1,17 @@
 import { Outlet } from 'react-router-dom';
 import SearchHeader from './components/SearchHeader'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 function App() {
+  const queryClient = new QueryClient();
+
   return (
-    <div className="bg-black text-white pb-32">
+    <>
       <SearchHeader />
-      <Outlet />
-    </div>
+      <QueryClientProvider client={queryClient}>
+        <Outlet />
+      </QueryClientProvider>
+    </>
   );
 }
 

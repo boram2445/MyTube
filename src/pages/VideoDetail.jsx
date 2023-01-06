@@ -4,8 +4,9 @@ import { FiThumbsUp, FiThumbsDown, FiMoreHorizontal } from "react-icons/fi";
 import { BiShare } from "react-icons/bi";
 import Description from "../components/Description";
 import VideoCard from "../components/VideoCard";
+import { getChannelInfo, getDetail, getRelated } from '../api/youtubeApi';
 
-export default function DetailPage() {
+export default function VideoDetail() {
   const [videoInfo, setVideoInfo] = useState({});
   const [relatedVideos, setRelatedVideos] = useState([]);
   const [channelImg, setChannelImg] = useState("");
@@ -14,29 +15,9 @@ export default function DetailPage() {
   const { title, description, channelId, channelTitle } = videoInfo;
 
   useEffect(() => {
-    // //비디오 상세 내용 가져오기
-    fetch(
-      `https://youtube.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${process.env.REACT_APP_YOUTUBE_KEY}`
-    )
-      // fetch("http://localhost:3000/data/info.json")
-      .then((res) => res.json())
-      .then((data) => setVideoInfo(data.items[0].snippet));
-
-    //관련 비디오 가져오기
-    fetch(
-      `https://youtube.googleapis.com/youtube/v3/search?part=snippet&relatedToVideoId=${videoId}&type=video&maxResults=25&key=${process.env.REACT_APP_YOUTUBE_KEY}`
-    )
-      // fetch("http://localhost:3000/data/related.json")
-      .then((res) => res.json())
-      .then((data) => setRelatedVideos(data.items));
-
-    fetch(
-      `https://youtube.googleapis.com/youtube/v3/channels?part=snippet&id=${channelId}&key=${process.env.REACT_APP_YOUTUBE_KEY}`
-    )
-      .then((res) => res.json())
-      .then((data) =>
-        setChannelImg(data.items[0].snippet.thumbnails.default.url)
-      );
+    // setVideoInfo(getDetail(videoId));
+    // setRelatedVideos(getRelated(videoId));
+    //  setChannelImg(getChannelInfo(channelId));
   }, []);
 
   return (

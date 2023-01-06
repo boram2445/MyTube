@@ -1,11 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./app";
-import "./styles/global.css";
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Videos from './pages/Videos';
-import Search from './pages/Search';
 import VideoDetail from './pages/VideoDetail';
+import './index.css';
 
 const router = createBrowserRouter([
   {

@@ -18,13 +18,13 @@ export default function VideoCard({ video, id, videoType, search, watch }) {
 
   useEffect(() => {
     //이걸 여기에서 호출해도 되는 걸까?
-    fetch(
-      `https://youtube.googleapis.com/youtube/v3/channels?part=snippet&id=${channelId}&key=${process.env.REACT_APP_YOUTUBE_KEY}`
-    )
-      .then((res) => res.json())
-      .then((data) =>
-        setChannelImg(data.items[0].snippet.thumbnails.default.url)
-      );
+    // fetch(
+    //   `https://youtube.googleapis.com/youtube/v3/channels?part=snippet&id=${channelId}&key=${process.env.REACT_APP_YOUTUBE_KEY}`
+    // )
+    //   .then((res) => res.json())
+    //   .then((data) =>
+    //     setChannelImg(data.items[0].snippet.thumbnails.default.url)
+    //   );
   });
 
   //home과 search에서 video 카드를 사용하는데, 형태가 너무 달라서 css 처리가 힘들어서 나누어 주었다.
@@ -121,10 +121,9 @@ export default function VideoCard({ video, id, videoType, search, watch }) {
 
   return (
     <article
-      className={`${search ? "flex items-start gap-4" : "max-w-xs m-auto"} ${
-        watch && "flex gap-2"
-      }`}
-      onClick={() => navigate(`/watch/${id}`)}
+      className={`${search ? "flex items-start gap-4" : "max-w-xs m-auto"} ${watch && "flex gap-2"
+        }`}
+      onClick={() => navigate(`/videos/watch/${id}`)}
     >
       {content}
     </article>
