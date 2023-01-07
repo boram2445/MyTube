@@ -4,7 +4,6 @@ import { FiThumbsUp, FiThumbsDown, FiMoreHorizontal } from "react-icons/fi";
 import { BiShare } from "react-icons/bi";
 import Description from "../components/Description";
 import VideoCard from "../components/VideoCard";
-import { getChannelInfo, getDetail, getRelated } from '../api/youtubeApi';
 
 export default function VideoDetail() {
   const [videoInfo, setVideoInfo] = useState({});
