@@ -10,7 +10,7 @@ export default function Description({ content }) {
       }`}
       onClick={() => setIsOpen((isOpen) => !isOpen)}
     >
-      <p className={`${!isOpen ? "h-24 overflow-hidden" : ""}`}>{content}</p>
+      <p className={`${!isOpen ? "line-clamp-4" : ""}`}>{content}</p>
     </div>
   );
 }

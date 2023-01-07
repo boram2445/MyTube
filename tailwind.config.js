@@ -13,5 +13,5 @@ module.exports = {
       "middle-grey": "#313131",
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/line-clamp")],
 };

@@ -14,7 +14,9 @@ export default function Videos() {
     isLoading,
     error,
     data: videos,
-  } = useQuery(["videos", keyword], () => youtube.search(keyword));
+  } = useQuery(["videos", keyword], () => youtube.search(keyword), {
+    staleTime: 1000 * 60 * 5,
+  });
 
   if (isLoading) return <p>로딩중</p>;
   if (error) return <p>Error</p>;
@@ -34,25 +36,25 @@ export default function Videos() {
             </button>
           </div>
         )}
-        <ul className="m-auto mt-6 grid gap-x-4 gap-y-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
+        <ul
+          className={`m-auto mt-6 grid gap-x-4 gap-y-8 ${
+            !keyword &&
+            "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4"
+          }`}
+        >
           {videos.map((video) => {
             const id = !keyword ? video.id : video.id.videoId;
-            // return (
-            //   <VideoCard
-            //     key={id}
-            //     video={video.snippet}
-            //     id={id}
-            //     search={keyword}
-            //   />
-            // );
-            return <li key={id}>{video.snippet.title}</li>;
+            return (
+              <VideoCard
+                key={id}
+                id={id}
+                video={video.snippet}
+                search={keyword && true}
+              />
+            );
           })}
         </ul>
       </div>
     </div>
   );
 }
-
-// videoType={
-//   keyword && video.id.kind.includes("video") ? "video" : "channel"
-// }

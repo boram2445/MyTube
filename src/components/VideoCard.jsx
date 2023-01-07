@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import decodeUnescape from "../utils/decodeUnescape";
 import getElapsedTime from "../utils/getElapsedTime";
+import ChannelImg from "./ChannelImg";
 
-export default function VideoCard({ video, id, videoType, search, watch }) {
+export default function VideoCard({ video, id, search, watch }) {
   const {
     thumbnails,
     title,
@@ -12,20 +13,8 @@ export default function VideoCard({ video, id, videoType, search, watch }) {
     publishedAt,
     description,
   } = video;
-  const [channelImg, setChannelImg] = useState("");
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    //이걸 여기에서 호출해도 되는 걸까?
-    // fetch(
-    //   `https://youtube.googleapis.com/youtube/v3/channels?part=snippet&id=${channelId}&key=${process.env.REACT_APP_YOUTUBE_KEY}`
-    // )
-    //   .then((res) => res.json())
-    //   .then((data) =>
-    //     setChannelImg(data.items[0].snippet.thumbnails.default.url)
-    //   );
-  });
 
   //home과 search에서 video 카드를 사용하는데, 형태가 너무 달라서 css 처리가 힘들어서 나누어 주었다.
   //근데 별로 효율적이지 않아보이는데 이렇게 해도 괜찮은걸까?
@@ -35,9 +24,9 @@ export default function VideoCard({ video, id, videoType, search, watch }) {
       <>
         <img className="rounded-2xl" src={thumbnails.medium.url} alt="" />
         <div className="flex mt-2.5">
-          <img className="rounded-full w-9 h-9 mr-3" src={channelImg} alt="" />
-          <div className="font-light text-xs ">
-            <strong className="font-semibold text-sm text-ellipsis">
+          <ChannelImg channelId={channelId} />
+          <div className="ml-2 font-light text-xs ">
+            <strong className="line-clamp-2 font-semibold text-sm">
               {title}
             </strong>
             <p className="text-grey mt-2">{channelTitle}</p>
@@ -50,13 +39,13 @@ export default function VideoCard({ video, id, videoType, search, watch }) {
         </div>
       </>
     );
-  } else if (search && videoType === "video") {
+  } else if (search) {
     content = (
       <>
         <img className="rounded-2xl" src={thumbnails.medium.url} alt="" />
         <div className="mt-2.5">
           <div className="font-light text-xs text-grey">
-            <strong className="text-lg font-normal text-ellipsis text-white">
+            <strong className="line-clamp-2 text-lg font-normal text-white">
               {decodeUnescape(title)}
             </strong>
             <p>
@@ -65,31 +54,9 @@ export default function VideoCard({ video, id, videoType, search, watch }) {
               <span> {getElapsedTime(publishedAt)}</span>
             </p>
             <div className="mt-4 mb-4 flex">
-              <img
-                className="rounded-full w-6 h-6 mr-3"
-                src={channelImg}
-                alt=""
-              />
               <p className="mt-2">{channelTitle}</p>
             </div>
-            <p>{description}</p>
-          </div>
-        </div>
-      </>
-    );
-  } else if (search && videoType === "channel") {
-    content = (
-      <>
-        <img
-          className="rounded-full w-24 h-24"
-          src={thumbnails.medium.url}
-          alt=""
-        />
-        <div className="mt-2.5">
-          <div className="font-light text-xs">
-            <strong className="text-lg font-normal text-ellipsis">
-              {channelTitle}
-            </strong>
+            <p className="line-clamp-2">{description}</p>
           </div>
         </div>
       </>
@@ -104,7 +71,7 @@ export default function VideoCard({ video, id, videoType, search, watch }) {
         />
         <div className="mt-2.5">
           <div className="font-light text-xs text-grey">
-            <strong className="text-sm font-normal text-ellipsis text-white ">
+            <strong className="line-clamp-2 text-sm font-normal text-white ">
               {title}
             </strong>
             <p className="mt-2">{channelTitle}</p>
@@ -120,12 +87,13 @@ export default function VideoCard({ video, id, videoType, search, watch }) {
   }
 
   return (
-    <article
-      className={`${search ? "flex items-start gap-4" : "max-w-xs m-auto"} ${watch && "flex gap-2"
-        }`}
-      onClick={() => navigate(`/videos/watch/${id}`)}
+    <li
+      className={`cursor-pointer ${
+        search ? "flex items-start gap-4" : "max-w-xs"
+      } ${watch && "flex gap-2"}`}
+      onClick={() => navigate(`/videos/watch/${id}`, { state: { video } })}
     >
       {content}
-    </article>
+    </li>
   );
 }
