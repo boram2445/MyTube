@@ -63,13 +63,9 @@ export default function VideoCard({ video, id, search, watch }) {
     );
   } else if (watch) {
     content = (
-      <div className="flex items-center gap-2 h-24 overflow-hidden">
-        <img
-          className="rounded-lg w-40 h-full"
-          src={thumbnails.medium.url}
-          alt=""
-        />
-        <div className="mt-2.5">
+      <div className="mb-2 flex gap-2 h-24">
+        <img className="rounded-lg h-full" src={thumbnails.medium.url} alt="" />
+        <div>
           <div className="font-light text-xs text-grey">
             <strong className="line-clamp-2 text-sm font-normal text-white ">
               {title}

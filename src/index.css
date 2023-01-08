@@ -3,7 +3,7 @@
 @import "tailwindcss/utilities";
 
 body {
-  margin: 0;
+  margin: auto;
   height: 100vh;
   @apply flex flex-col items-center;
   @apply bg-black text-white;

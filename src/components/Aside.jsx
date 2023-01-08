@@ -9,7 +9,6 @@ export default function Aside() {
         <MdHomeFilled />
         <p className="text-xs">홈</p>
       </button>
-
       <button className="w-full pt-3 pb-3 text-xl flex flex-col justify-center items-center gap-2 font-thin hover:rounded-lg hover:bg-middle-grey">
         <BsCollectionPlay />
         <p className="text-xs">구독</p>

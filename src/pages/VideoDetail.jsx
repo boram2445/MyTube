@@ -14,7 +14,6 @@ export default function VideoDetail() {
 
   const { title, description, channelId, channelTitle } = video;
 
-  console.log(video);
   return (
     <section className="flex m-auto mt-6 pl-5 pr-5 justify-center max-w-5xl gap-4">
       <article>
@@ -26,7 +25,6 @@ export default function VideoDetail() {
           height="360"
           src={`https://www.youtube.com/embed/${videoId}`}
         ></iframe>
-
         <div className="mt-3 max-w-2xl pl-1 pr-1 flex flex-col gap-2">
           <strong className="text-xl font-semibold">{title}</strong>
           <div className="flex justify-between">
@@ -42,7 +40,6 @@ export default function VideoDetail() {
                 </button>
               </div>
             </div>
-
             <div className="flex gap-2 mt-1 mb-1 ">
               <div className="flex">
                 <button className="p-1.5 pl-4 pr-4 flex items-center gap-2 bg-middle-grey rounded-l-full hover:brightness-125">

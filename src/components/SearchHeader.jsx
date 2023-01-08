@@ -10,7 +10,7 @@ export default function SearchHeader() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setText(keyword || '');
+    setText(keyword || "");
   }, [keyword]);
 
   const handleChange = (e) => setText(e.target.value);
@@ -36,7 +36,6 @@ export default function SearchHeader() {
           <h1>MyTube</h1>
         </Link>
       </div>
-
       <form
         onSubmit={handleSubmit}
         className="m-auto flex justify-center max-w-xl flex-1 border border-middle-grey rounded-full"

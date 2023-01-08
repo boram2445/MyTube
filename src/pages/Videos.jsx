@@ -1,11 +1,11 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { useYoutubeApi } from "../context/youtubeApiContext";
 import TagList from "../components/TagList";
 import VideoCard from "../components/VideoCard";
 import Aside from "../components/Aside";
-import { useParams } from "react-router-dom";
 import { BsFilterSquare } from "react-icons/bs";
-import { useYoutubeApi } from "../context/youtubeApiContext";
 
 export default function Videos() {
   const { keyword } = useParams();
@@ -15,12 +15,11 @@ export default function Videos() {
     error,
     data: videos,
   } = useQuery(["videos", keyword], () => youtube.search(keyword), {
-    staleTime: 1000 * 60 * 5,
+    staleTime: 1000 * 60,
   });
 
   if (isLoading) return <p>로딩중</p>;
   if (error) return <p>Error</p>;
-  console.log(videos);
 
   return (
     <div className="flex">
